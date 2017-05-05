@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Animated, View } from 'react-native';
+import { Animated, View, Text, StyleSheet } from 'react-native';
 import styles from './styles';
 
 export default class Bar extends Component {
@@ -12,6 +12,7 @@ export default class Bar extends Component {
     style: View.propTypes.style,
     value: PropTypes.number.isRequired,
     valueScaleSpringFriction: PropTypes.number.isRequired,
+    label: PropTypes.string,
   };
 
   static defaultProps = {
@@ -87,7 +88,27 @@ export default class Bar extends Component {
       <View style={[this.getStyles().container, style]}>
         <Animated.View style={this.getStyles().maximum} />
         <Animated.View style={this.getStyles().value} />
+        <View style={innerStyles.labelContainer}>
+          <Text style={innerStyles.label}>
+            {this.props.label}
+          </Text>
+        </View>
       </View>
     );
   }
 }
+
+const innerStyles = StyleSheet.create({
+  labelContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    top: 140,
+    position: 'absolute',
+  },
+  label: {
+    flex: 1,
+    fontSize: 9,
+    textAlign: 'center',
+    color: '#ccc'
+  }
+})

@@ -94,8 +94,15 @@ export default class BarChart extends Component {
     const gridMaxValue = this.getGridMaxValue();
     const dataSetsBars = dataSets.map(dataSet => {
       return dataSet.data.map((data, index) => {
+        let label: string = `${dataSet.data.length - index - 1}wk ago`
+        if ((dataSet.data.length - 1) === index) {
+          label = 'Curr wk.'
+        } else if ((dataSet.data.length - 2) === index) {
+          label = 'Last wk.'
+        }
         return (
           <Bar
+            label={label}
             key={`${dataSet.fillColor}${index}`}
             fillColor={dataSet.fillColor}
             horizontal={horizontal}
